@@ -17,16 +17,16 @@ I have created scripts in the "package.json" to run the files
    - the key value which is responsible for the files
 
 * For exapmle, if you want to run index.js file then go with the below command
-                npm run start 
+#                 npm run start 
 
 * if you want to run use.js file then go with the below command
-                npm run usecode 
+#                 npm run usecode 
 
 * if you want to run gse.js file then go with the below command
-                 npm run gsecode 
+#                 npm run gsecode 
 
 * if you want to run gsewithpromiseall.js file then go with the below command
-                npm run gsewithprom
+ **               npm run gsewithprom
     
     .
     .
