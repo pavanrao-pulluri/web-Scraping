@@ -6,9 +6,8 @@ const { writeFileSync } = require("fs");
 const url = "https://gse.com.gh/press-releases/";
 
 const results = [];
-// const results1 = [];
 
-async function mainurl() {
+async function gsecode() {
   const res = await axios(url);
   const $ = cheerio.load(res.data);
   const dataele = $(".nectar-post-grid-item");
@@ -23,13 +22,10 @@ async function mainurl() {
     const pressnote = head_ele.text();
 
     const pdfbase = $(ele).find("a.nectar-post-grid-link").attr("href");
-
     results.push({ company_name, date, pressnote, pdfbase });
-
-    // calling innnerurl function to scrape data for each pdfbase link
     await innnerurl(results);
 
-    // console.log(results);
+    console.log(results);
   }
 }
 
@@ -37,14 +33,12 @@ async function innnerurl(results) {
   for (const ele of results) {
     const res = await axios(ele.pdfbase);
     const $ = cheerio.load(res.data);
-    // const dataele = $("div.content-inner");
     const pdflink = $("div.content-inner")
-      .find("figure>iframe.embed-pdf-viewer.lazyload")
-      .attr("data-src");
-    ele.pdflink = pdflink;
-    // results1.push({ pdflink });
+      .find("figure>p>a:nth-child(1)")
+      .attr("href");
+    console.log(pdflink);
+    // ele.pdflink = pdflink;
+    // results.push({ pdflink });
   }
-  console.log(results);
 }
-mainurl();
-module.exports = mainurl;
+gsecode();
